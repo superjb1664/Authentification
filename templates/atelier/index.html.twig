@@ -6,30 +6,29 @@
 
 {% endblock %}
 
-{% block title %}Atelier index{% endblock %}
+{% block title %}Liste des ateliers{% endblock %}
 
 {% block body %}
-    <h1>Atelier index</h1>
+    <h1>Liste des ateliers</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+
                 <th>Titre</th>
                 <th>Image</th>
-                <th>Unitedeperformance</th>
-                <th>Unitedintensite</th>
+                <th>Unité de performance</th>
+                <th>Unité d'intensite</th>
                 <th>Description</th>
-                <th>Resume</th>
-                <th>actions</th>
+                <th>Resumé</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for atelier in ateliers %}
             <tr>
-                <td>{{ atelier.id }}</td>
                 <td>{{ atelier.titre }}</td>
-                <td>{{ atelier.image }}</td>
+                <td> <img src="{{ path('default')}}image/{{ atelier.image }}" height="30"></td>
                 <td>{{ atelier.unitedeperformance }}</td>
                 <td>{{ atelier.unitedintensite }}</td>
                 <td>{{ atelier.description }}</td>
