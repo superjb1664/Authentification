@@ -4,6 +4,10 @@ Démarrer le serveur :
 
 
 Git :
+    pour initialiser : git init
+    pour ajouter tous les fichiers :  git add -A
+    Pour ajouter un dépot distant : git remote add origin https://github.com/superjb1664/ReactWeb.git
+
     Après un git clone (composer resynchronise symfony) : composer update
 
 Entité vers Mysql

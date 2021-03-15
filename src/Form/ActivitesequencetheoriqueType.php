@@ -30,6 +30,7 @@ class ActivitesequencetheoriqueType extends AbstractType
                 'scale' => 1,
                 'attr'  => ['length' => 4]])
             ->add('ordre', HiddenType::class)
+            ->add('id', HiddenType::class)
             ->add('idsequencetheorique', HiddenType::class)
             ->add('idatelier', EntityType::class, [
                 'class' => Atelier::class,
