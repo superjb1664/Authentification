@@ -9,6 +9,7 @@ Git :
     Pour ajouter un dépot distant : git remote add origin https://github.com/superjb1664/ReactWeb.git
 
     Après un git clone (composer resynchronise symfony) : composer update
+    Après un pull composer install
 
 Entité vers Mysql
     php bin/console make:migration
@@ -23,3 +24,6 @@ Pour ajouter les get/set
  php bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entity --filter="matable"
 
 php bin/console make:entity --regenerate App
+
+Création CRUD
+php bin/console make:crud
