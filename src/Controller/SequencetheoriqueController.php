@@ -42,14 +42,12 @@ class SequencetheoriqueController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
 
-        // Search the neighborhoods that belongs to the city with the given id as GET parameter "cityid"
         $ateliers =  $em->getRepository(Atelier::class)
             ->createQueryBuilder("a")
             ->where("a.id = :idAtelier")
             ->setParameter("idAtelier", $request->query->get("atelierid"))
             ->getQuery()
             ->getResult();
-
 
 
         $responseArray = array(
@@ -149,7 +147,7 @@ class SequencetheoriqueController extends AbstractController
      */
     public function activitesequencetheorique_supprimer(Sequencetheorique $sequencetheorique, Activitesequencetheorique $activitesequencetheorique, Request $request): Response
     {
-
+       // $this->getUser();
         $expr = Criteria::expr();
         $criteria = Criteria::create();
         $criteria->where($expr->gt('ordre',  $activitesequencetheorique->getOrdre()));
