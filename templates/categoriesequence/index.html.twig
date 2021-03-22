@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Categoriesequence index</h1>
+    <h1>Liste des catégories de séquence</h1>
 
     <table class="table">
         <thead>
@@ -26,17 +26,17 @@
                 <td>{{ categoriesequence.titre }}</td>
                 <td>{{ categoriesequence.image }}</td>
                 <td>
-                    <a href="{{ path('categoriesequence_show', {'id': categoriesequence.id}) }}">show</a>
-                    <a href="{{ path('categoriesequence_edit', {'id': categoriesequence.id}) }}">edit</a>
+                    <a href="{{ path('categoriesequence_show', {'id': categoriesequence.id}) }}">Afficher</a>
+                    <a href="{{ path('categoriesequence_edit', {'id': categoriesequence.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun enregistrement de trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('categoriesequence_new') }}">Create new</a>
+    <a href="{{ path('categoriesequence_new') }}">Ajouter</a>
 {% endblock %}

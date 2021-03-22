@@ -1,6 +1,6 @@
 
 Démarrer le serveur :
-    symfony server:start
+    symfony server:start -d
 
 
 Git :

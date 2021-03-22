@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sequencetheorique index{% endblock %}
+{% block title %}Liste des Séquences{% endblock %}
 
 {% block menu %}
     {% import 'macro/macroMenu.html.twig' as macroMenu %}
@@ -27,17 +27,17 @@
                 <td>{{ sequencetheorique.titre }}</td>
                 <td>{{ sequencetheorique.niveau }}</td>
                 <td>
-                    <a href="{{ path('sequencetheorique_show', {'id': sequencetheorique.id}) }}">show</a>
-                    <a href="{{ path('sequencetheorique_edit', {'id': sequencetheorique.id}) }}">edit</a>
+                    <a href="{{ path('sequencetheorique_show', {'id': sequencetheorique.id}) }}">Afficher</a>
+                    <a href="{{ path('sequencetheorique_edit', {'id': sequencetheorique.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas d'enregistrements</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('sequencetheorique_new') }}">Create new</a>
+    <a href="{{ path('sequencetheorique_new') }}">Ajouter une nouvelle</a>
 {% endblock %}
