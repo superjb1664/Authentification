@@ -2,14 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Activitesequencetheorique;
 use App\Entity\Atelier;
+use App\Entity\CommentaireAtelier;
+use App\Entity\Sequencetheorique;
 use App\Form\AtelierType;
+use App\Form\CommentaireAtelierType;
 use App\Service\ContainerParametersHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 /**
  * @Route("/atelier")
@@ -64,13 +69,52 @@ class AtelierController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/{id}", name="atelier_show", methods={"GET"})
+     * @Route("/supprimerCommentaire/{atelier}/{commentaire}", name="supprimerCommentaire", methods={"GET"})
+     * @Entity("Atelier", expr="repository.find(atelier)")
+     * @Entity("CommentaireAtelier", expr="repository.find(commentaire)")
      */
-    public function show(Atelier $atelier): Response
+    public function supprimerCommentaire(Atelier $atelier, CommentaireAtelier $commentaireAtelier, Request $request): Response
     {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($commentaireAtelier);
+        $entityManager->flush($commentaireAtelier);
+
+
+
+        $commentaireAtelier = new CommentaireAtelier();
+        $form = $this->createForm(CommentaireAtelierType::class, $commentaireAtelier);
+        $form->handleRequest($request);
+
         return $this->render('atelier/show.html.twig', [
             'atelier' => $atelier,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="atelier_show", methods={"GET","POST"})
+     */
+    public function show(Atelier $atelier, Request $request): Response
+    {
+
+        $commentaireAtelier = new CommentaireAtelier();
+        $form = $this->createForm(CommentaireAtelierType::class, $commentaireAtelier);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $commentaireAtelier->setDate(new \DateTime());
+            $commentaireAtelier->setProprietaire($this->getUser());
+            $commentaireAtelier->setAtelier($atelier);
+            $entityManager->persist($commentaireAtelier);
+            $entityManager->flush();
+        }
+        return $this->render('atelier/show.html.twig', [
+            'atelier' => $atelier,
+            'form' => $form->createView(),
         ]);
     }
 

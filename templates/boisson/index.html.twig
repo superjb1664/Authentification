@@ -22,7 +22,7 @@
         {% for boisson in boissons %}
             <tr>
 
-                <td>{{ boisson.titre }}</td>
+                <td> <img src="{{ path('default')}}image/{{ boisson.image }}" height="30"> {{ boisson.titre }}</td>
                 <td>{{ boisson.description }}</td>
                 <td>
                     <a href="{{ path('boisson_show', {'id': boisson.id}) }}">montrer</a>

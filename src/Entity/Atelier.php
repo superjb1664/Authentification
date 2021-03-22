@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +64,16 @@ class Atelier
      * @ORM\Column(name="resume", type="text", length=65535, nullable=false)
      */
     private $resume;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CommentaireAtelier::class, mappedBy="atelier")
+     */
+    private $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +148,36 @@ class Atelier
     public function setResume(string $resume): self
     {
         $this->resume = $resume;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentaireAtelier[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(CommentaireAtelier $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setAtelier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(CommentaireAtelier $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getAtelier() === $this) {
+                $commentaire->setAtelier(null);
+            }
+        }
 
         return $this;
     }

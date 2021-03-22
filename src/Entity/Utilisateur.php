@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -59,6 +61,11 @@ class Utilisateur implements UserInterface
     private $roles = [];
 
     /**
+     * @ORM\OneToMany(targetEntity=CommentaireAtelier::class, mappedBy="proprietaire", orphanRemoval=true)
+     */
+    private $commentaireAteliers;
+
+    /**
      * Utilisateur constructor.
      */
     public function __construct()
@@ -70,6 +77,7 @@ class Utilisateur implements UserInterface
         $this->email = "";
         $this->password = "";
         $this->roles = "";
+        $this->commentaireAteliers = new ArrayCollection();
     }
 
     public function getId(): int
@@ -174,5 +182,35 @@ class Utilisateur implements UserInterface
     */
     public function eraseCredentials(): void
     {
+    }
+
+    /**
+     * @return Collection|CommentaireAtelier[]
+     */
+    public function getCommentaireAteliers(): Collection
+    {
+        return $this->commentaireAteliers;
+    }
+
+    public function addCommentaireAtelier(CommentaireAtelier $commentaireAtelier): self
+    {
+        if (!$this->commentaireAteliers->contains($commentaireAtelier)) {
+            $this->commentaireAteliers[] = $commentaireAtelier;
+            $commentaireAtelier->setProprietaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaireAtelier(CommentaireAtelier $commentaireAtelier): self
+    {
+        if ($this->commentaireAteliers->removeElement($commentaireAtelier)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaireAtelier->getProprietaire() === $this) {
+                $commentaireAtelier->setProprietaire(null);
+            }
+        }
+
+        return $this;
     }
 }
