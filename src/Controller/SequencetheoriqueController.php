@@ -38,8 +38,7 @@ class SequencetheoriqueController extends AbstractController
      */
     public function donneInfoAtelier_ajax(Request $request): Response
     {
-        // Get Entity manager and repository
-        $em = $this->getDoctrine()->getManager();
+          $em = $this->getDoctrine()->getManager();
 
 
         $ateliers =  $em->getRepository(Atelier::class)
@@ -56,9 +55,7 @@ class SequencetheoriqueController extends AbstractController
             );
 
 
-
-        // Return array with structure of the neighborhoods of the providen city id
-        return new JsonResponse($responseArray);
+      return new JsonResponse($responseArray);
     }
 
 
