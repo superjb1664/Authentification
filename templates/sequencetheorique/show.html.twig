@@ -63,7 +63,7 @@
         <tbody>
         {% for activitesequencetheorique in activitesequencetheoriques %}
             <tr>
-                <td> <img src="{{ path('default')}}image/{{ atelier.image }}" height="30" width="30"> {{ activitesequencetheorique.idatelier.titre }}</td>
+                <td> <img src="{{ path('default')}}image/{{ activitesequencetheorique.idatelier.image }}" height="30" width="30"> {{ activitesequencetheorique.idatelier.titre }}</td>
                 <td>{{ activitesequencetheorique.perfobjectif }} {{ activitesequencetheorique.idatelier.unitedeperformance }}</td>
                 <td>{{ activitesequencetheorique.intensiteObjectif }} {{ activitesequencetheorique.idatelier.unitedintensite }}</td>
 
