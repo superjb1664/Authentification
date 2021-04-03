@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 30 mars 2021 à 01:07
+-- Généré le : sam. 03 avr. 2021 à 08:49
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.9
 
@@ -102,6 +102,14 @@ CREATE TABLE `boisson` (
   `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `boisson`
+--
+
+INSERT INTO `boisson` (`id`, `titre`, `description`, `image`) VALUES
+(2, 'Power 2000', 'Pour plus d\'énergie', 'BoissonEnergie-60679b95cd0ca.png'),
+(3, 'Hydra 400', 'Pour s\'hydrater et récupérer plus vite', 'BopissonHydra-60679bd948fcb.png');
 
 -- --------------------------------------------------------
 
@@ -365,7 +373,7 @@ ALTER TABLE `atelier`
 -- AUTO_INCREMENT pour la table `boisson`
 --
 ALTER TABLE `boisson`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `categoriesequence`
